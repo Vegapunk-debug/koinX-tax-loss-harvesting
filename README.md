@@ -15,7 +15,17 @@ A high-performance, responsive React-based interface designed for crypto investo
 ---
 
 ## Interface Preview
-![KoinX Dashboard Preview](./assets/)
+![KoinX Dashboard Preview]
+<table>
+  <tr>
+    <td><img src="assets/Scr" alt="Screenshot 1" width="100%"></td>
+    <td><img src="path/to/your/screenshot2.png" alt="Screenshot 2" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="path/to/your/screenshot3.png" alt="Screenshot 3" width="100%"></td>
+    <td><img src="path/to/your/screenshot4.png" alt="Screenshot 4" width="100%"></td>
+  </tr>
+</table>
 *Modern, dark-themed dashboard with real-time gain/loss tracking and harvesting simulations.*
 
 ---
