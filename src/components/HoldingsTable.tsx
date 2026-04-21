@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Holding } from '../types';
-import { formatCurrency, formatHolding, formatPrice, formatCompact, formatFull, formatGain } from '../utils/formatters';
+import { formatHolding, formatPrice, formatCompact, formatFull, formatGain } from '../utils/formatters';
 import '../styles/HoldingsTable.css';
 
 interface Props {
