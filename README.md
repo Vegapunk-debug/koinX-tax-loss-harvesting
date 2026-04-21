@@ -95,7 +95,7 @@ To run this project locally, follow these steps:
 
 - **Asset Classification:** We assume the STCG/LTCG breakdown provided by the API adheres to the specific tax residency of the user (defaults to Indian tax year logic for this demonstration).
 - **Mock Data Layer:** Data is fetched via a promise-based mock service to demonstrate asynchronous loading states and error handling (`ErrorState.tsx`).
-- **Currency Handling:** The application defaults to **INR (₹)** as the primary currency, tailored for the target demographic.
+- **Currency Handling:** The application defaults to **USD ($)** as the primary currency, tailored for the target demographic.
 - **State Flow Logic:**
   ```diff
   - Prop Drilling State
