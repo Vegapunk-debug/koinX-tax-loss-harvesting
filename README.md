@@ -10,19 +10,19 @@ A high-performance, responsive React-based interface designed for crypto investo
 ---
 
 ## Live Deployment
-**URL:** https://koin-x-tax-loss-harvesting-phi.vercel.app/
+**URL:** [https://koin-x-tax-loss-harvesting-phi.vercel.app](https://koin-x-tax-loss-harvesting-phi.vercel.app)
 
 ---
 
 ## KoinX Dashboard Preview
 <table>
   <tr>
-    <td><img src="assets/screenshot1.png" alt="Screenshot 1" width="100%"></td>
-    <td><img src="assets/screenshot2.png" alt="Screenshot 2" width="100%"></td>
+    <td><img src="assets/screenshot1.png" alt="Dashboard Main" width="100%"></td>
+    <td><img src="assets/screenshot2.png" alt="Holdings Table" width="100%"></td>
   </tr>
   <tr>
-    <td><img src="assets/screenshot3.png" alt="Screenshot 3" width="100%"></td>
-    <td><img src="assets/screenshot4.png" alt="Screenshot 4" width="100%"></td>
+    <td><img src="assets/screenshot3.png" alt="Mobile View" width="100%"></td>
+    <td><img src="assets/screenshot4.png" alt="Performance View" width="100%"></td>
   </tr>
 </table>
 *Modern, dark-themed dashboard with real-time gain/loss tracking and harvesting simulations.*
@@ -93,9 +93,9 @@ To run this project locally, follow these steps:
 
 ## Key Assumptions & Rationale
 
-- **Asset Classification:** We assume the STCG/LTCG breakdown provided by the API adheres to the specific tax residency of the user (defaults to Indian tax year logic for this demonstration).
+- **Asset Classification:** We assume the STCG/LTCG breakdown provided by the API adheres to standard tax harvesting logic where short-term losses offset short-term gains first.
 - **Mock Data Layer:** Data is fetched via a promise-based mock service to demonstrate asynchronous loading states and error handling (`ErrorState.tsx`).
-- **Currency Handling:** The application defaults to **USD ($)** as the primary currency, tailored for the target demographic.
+- **Currency Handling:** The application defaults to **USD ($)** as the primary currency, tailored for a global user base.
 - **State Flow Logic:**
   ```diff
   - Prop Drilling State
@@ -111,18 +111,20 @@ The core logic for tax savings is calculated by simulating the sale of selected 
 
 ```typescript
 // How we dynamically calculate potential savings:
-// We take the initial profile and 'merge' the selected assets' gains/losses 
-// into a virtual post-harvesting bucket.
+// We iterate through selected indices and add their gains/losses 
+// to the pre-harvesting totals to simulate the 'After' state.
 
-const postHarvestingGain = (initialGain, selectedAssets) => {
-  let simulatedNet = initialGain;
-  selectedAssets.forEach(asset => {
-    // If we harvest a loss, it reduces our taxable gain
-    // If we harvest a gain (rare!), it increases it
-    simulatedNet += asset.unrealisedGain;
-  });
-  return simulatedNet;
-}
+selectedIndices.forEach(idx => {
+  const h = holdings[idx];
+  
+  // Handle Short Term (STCG)
+  if (h.stcg.gain > 0) stcgProfits += h.stcg.gain;
+  else stcgLosses += Math.abs(h.stcg.gain);
+
+  // Handle Long Term (LTCG)
+  if (h.ltcg.gain > 0) ltcgProfits += h.ltcg.gain;
+  else ltcgLosses += Math.abs(h.ltcg.gain);
+});
 ```
 
 ---
@@ -135,4 +137,4 @@ const postHarvestingGain = (initialGain, selectedAssets) => {
 
 ---
 
-*Proudly build for the KoinX Internship Challenge.*
+*Proudly built for the KoinX Internship Challenge.*
