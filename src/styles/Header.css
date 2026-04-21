@@ -3,7 +3,7 @@
 .header {
   background: var(--color-surface);
   box-shadow: var(--shadow-navbar);
-  padding: 8px 80px;
+  padding: 12px 80px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -22,6 +22,13 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+}
+
+.koinx-logo-img {
+  height: 80px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .navbarright {
