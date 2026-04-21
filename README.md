@@ -1,4 +1,4 @@
-# 📈 KoinX — Crypto Tax Loss Harvesting Tool
+# KoinX — Crypto Tax Loss Harvesting Tool
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://koinx-tax-loss-harvesting.vercel.app)
 [![React](https://img.shields.io/badge/React-19-blue.svg)](https://reactjs.org/)
@@ -9,43 +9,44 @@ A high-performance, responsive React-based interface designed for crypto investo
 
 ---
 
-## 🚀 Live Deployment
+## Live Deployment
 **URL:** [https://koinx-tax-loss-harvesting.vercel.app](https://koinx-tax-loss-harvesting.vercel.app)
 
 ---
 
-## 📸 Interface Preview
+## Interface Preview
 ![KoinX Dashboard Preview](./assets/dashboard-preview.png)
 *Modern, dark-themed dashboard with real-time gain/loss tracking and harvesting simulations.*
 
 ---
 
-## ✨ Core Features
+## Core Features
 
-- **📊 Dynamic Gain Simulation**
+- **Dynamic Gain Simulation**
   - **Pre-Harvesting View:** Real-time data from the Capital Gains API showing Short Term (STCG) and Long Term (LTCG) metrics.
   - **Post-Harvesting View:** Interactive simulation that updates as you select/deselect holdings for harvesting.
-- **📉 Optimized Harvesting Logic**
+- **Optimized Harvesting Logic**
   - Instant calculation of potential tax savings.
-  - Smart categorization of losses (Short-term vs. Long-term).
-- **📋 Advanced Holdings Table**
+  - Smart categorization of losses (Short-term vs. Long-term offsets).
+- **Advanced Holdings Table**
   - Bulk selection with "Select All" functionality.
-  - Granular control over individual assets.
-  - Responsive design that maintains readability on mobile.
-- **⚡ Native Performance**
-  - Powered by React 19 and Vite for near-instant load times.
-  - Vanilla CSS for pixel-perfect control without the overhead of utility frameworks.
+  - Granular control over individual assets for harvesting.
+  - Responsive design that maintains readability on mobile devices.
+- **Technical Excellence**
+  - Powered by **React 19** and **Vite** for near-instant load times.
+  - **Vanilla CSS** for pixel-perfect control without the overhead of utility frameworks.
+  - Strict TypeScript for robust data handling.
 
 ---
 
-## 🛠 Project Architecture
+## Project Architecture
+
 The project follows a modular, feature-based directory structure for high maintainability:
 
 ```text
 src/
 ├── components/          # UI Components (Header, Table, Cards, Loaders)
-├── context/             # Global State Management (Harvesting Provider)
-├── hooks/               # Custom hooks for API interaction & calculations
+├── hooks/               # Custom hooks for logic extraction (Planned)
 ├── services/            # Mock API layer with simulated network latency
 ├── styles/              # Design tokens and component-specific CSS
 ├── types/               # Strict TypeScript interface definitions
@@ -54,7 +55,7 @@ src/
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
 To run this project locally, follow these steps:
 
@@ -81,42 +82,48 @@ To run this project locally, follow these steps:
 
 ---
 
-## 📝 Key Assumptions & Rationale
+## Key Assumptions & Rationale
 
-- **Wash Sale Rules:** For the purpose of this interface, we assume the user understands wash-sale implications. The tool focuses on calculation rather than compliance auditing.
+- **Asset Classification:** We assume the STCG/LTCG breakdown provided by the API adheres to the specific tax residency of the user (defaults to Indian tax year logic for this demonstration).
 - **Mock Data Layer:** Data is fetched via a promise-based mock service to demonstrate asynchronous loading states and error handling (`ErrorState.tsx`).
 - **Currency Handling:** The application defaults to **INR (₹)** as the primary currency, tailored for the target demographic.
-- **State Flow:**
+- **State Flow Logic:**
   ```diff
-  - Simple Local State
-  + Global Context Pattern
+  - Prop Drilling State
+  + Centralized State in App.tsx
   ```
-  We opted for `useContext` + `useReducer` to manage the complex interaction between the Holdings Table and the Summary Cards without unnecessary re-renders.
+  While a Redux/Context approach was considered, the current state depth justified a centralized `App.tsx` container for better performance and simpler logic flow.
 
 ---
 
-## 🧠 Business Logic Implementation
+## Harvesting Calculation (The "Human" Bit)
 
-The core logic for tax savings is calculated as follows:
+The core logic for tax savings is calculated by simulating the sale of selected holdings and recalculating the net gain. This is how we handle the "After Harvesting" state:
 
 ```typescript
-// Simplified logic used in src/utils/calculations.ts
-const calculateHarvesting = (holdings) => {
-  const selectedHoldings = holdings.filter(h => h.selected);
-  
-  // Realised Gain = Net Gain after offsetting losses
-  const postHarvestingGain = totalProfits - totalLosses;
-  const savings = preHarvestingGain - postHarvestingGain;
-  
-  return savings > 0 ? savings : 0;
+// How we dynamically calculate potential savings:
+// We take the initial profile and 'merge' the selected assets' gains/losses 
+// into a virtual post-harvesting bucket.
+
+const postHarvestingGain = (initialGain, selectedAssets) => {
+  let simulatedNet = initialGain;
+  selectedAssets.forEach(asset => {
+    // If we harvest a loss, it reduces our taxable gain
+    // If we harvest a gain (rare!), it increases it
+    simulatedNet += asset.unrealisedGain;
+  });
+  return simulatedNet;
 }
 ```
 
 ---
 
-## 🤝 Contributing
-Feel free to open an issue or submit a pull request if you have ideas for improving the harvesting algorithms or specialized UI enhancements!
+## Future Roadmap
+
+- [ ] **Real-time API Integration:** Hook up into Coingecko/Binance APIs for live price feeds.
+- [ ] **Multi-Currency Support:** Support for USD, EUR, and GBP.
+- [ ] **PDF Export:** Generate a "Harvesting Plan" report for tax consultants.
 
 ---
 
-*Built with ❤️ for the KoinX Engineering Challenge.*
+*Proudly build for the KoinX Internship Challenge.*
