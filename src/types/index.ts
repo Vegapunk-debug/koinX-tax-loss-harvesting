@@ -8,3 +8,12 @@ export type Holding = {
   stcg: { balance: number; gain: number };
   ltcg: { balance: number; gain: number };
 };
+
+export type CapitalGains = {
+  stcg: { profits: number; losses: number };
+  ltcg: { profits: number; losses: number };
+};
+
+export type CapitalGainsResponse = {
+  capitalGains: CapitalGains;
+};
