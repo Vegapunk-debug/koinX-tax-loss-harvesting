@@ -1,6 +1,6 @@
 # KoinX — Crypto Tax Loss Harvesting Tool
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://koinx-tax-loss-harvesting.vercel.app)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://koin-x-tax-loss-harvesting-phi.vercel.app)
 [![React](https://img.shields.io/badge/React-19-blue.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.0-purple.svg)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue.svg)](https://www.typescriptlang.org/)
@@ -15,7 +15,7 @@ A high-performance, responsive React-based interface designed for crypto investo
 ---
 
 ## Interface Preview
-![KoinX Dashboard Preview](./assets/dashboard-preview.png)
+![KoinX Dashboard Preview](./assets/)
 *Modern, dark-themed dashboard with real-time gain/loss tracking and harvesting simulations.*
 
 ---
