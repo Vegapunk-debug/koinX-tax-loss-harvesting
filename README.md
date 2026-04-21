@@ -10,7 +10,7 @@ A high-performance, responsive React-based interface designed for crypto investo
 ---
 
 ## Live Deployment
-**URL:** [https://koinx-tax-loss-harvesting.vercel.app](https://koinx-tax-loss-harvesting.vercel.app)
+**URL:** https://koin-x-tax-loss-harvesting-phi.vercel.app/
 
 ---
 
